@@ -31,13 +31,10 @@ This project uses the following technologies:
 
 Please ensure you have all the above dependencies installed on your system including both Android Studio and Xcode w/Simulator for Mac or just Android Studio for Windows and Linux [React Native Environment Setup](https://reactnative.dev/docs/environment-setup)
 
--[Clone] git@github.com:derekwebdevcom/SkyCloud-Exchange.git for Mac or -[Download Zip](https://github.com/derekwebdevcom/SkyCloud-Exchange/archive/master.zip) for Windows
+-[Clone](https://github.com/derekwebdevcom/EasyGig.git) for Mac or -[Download Zip](https://github.com/derekwebdevcom/EasyGig/archive/refs/heads/master.zip) for Windows
 
 ## Quick Start:
 
-// NPM install and Truffle Migrate to deploy your Smart Contract to your local Blockchain. Client Application ports on
-http://localhost:3000
-
-## Quick Deployment: for deploying to a test network visit the following link for updated information
-
-https://www.trufflesuite.com/tutorials/using-infura-custom-provider
+// Yarn Install and npx pod-install cd server Yarn install.
+yarn start in server directory & yarn ios or yarn android in root folder. GraphQL ports to
+http://localhost:4000/graphql
