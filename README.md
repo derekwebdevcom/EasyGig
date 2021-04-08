@@ -4,7 +4,7 @@ FullStack React Native TypeScript, GraphQL App for posting small and odd jobs in
 
 # TypeScript, TypeOrm, Express JWT, React Native w/ Hooks
 
-![Final App](./readmeassets/splashscreen.png)
+![Final App](./readmeassets/spashscreen.png)
 ![Final App](./readmeassets/registerscreen.png)
 ![Final App](./readmeassets/indev.png)
 
