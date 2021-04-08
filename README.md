@@ -8,6 +8,7 @@ FullStack React Native TypeScript, GraphQL App for posting small and odd jobs in
 <img src="./readmeassets/splashscreen.png" width="200" height="400">
 <img src="./readmeassets/registerscreen.png" width="200" height="400">
 </p>
+
 ![Final App](./readmeassets/indev.png)
 
 # This app does not use Expo runs natively on respected device
