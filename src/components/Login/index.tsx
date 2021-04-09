@@ -7,7 +7,7 @@ import Feather from 'react-native-vector-icons/Feather';
 import Register from '../Register';
 import * as Animatable from 'react-native-animatable';
 import styles from './styles';
-import {useLoginMutation} from '../../generated/graphql';
+import {MeDocument, MeQuery, useLoginMutation} from '../../generated/graphql';
 import {useNavigation} from '@react-navigation/native';
 import {setAccessToken} from '../../accessToken';
 const Login = (props: any) => {
@@ -56,6 +56,17 @@ const Login = (props: any) => {
       variables: {
         email,
         password,
+      },
+      update: (store, {data}) => {
+        if (!data) {
+          return null;
+        }
+        store.writeQuery<MeQuery>({
+          query: MeDocument,
+          data: {
+            me: data.login.user,
+          },
+        });
       },
     });
     console.log(response);

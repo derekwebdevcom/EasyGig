@@ -1,8 +1,8 @@
 # EasyGig Job Posting
 
-FullStack React Native TypeScript, GraphQL App for posting small and odd jobs in the community. -In progress CI/CD project
+FullStack Next.js Web Client, React Native Mobile Client, TypeScript, GraphQL App for posting small and odd jobs in the community. -In progress CI/CD pipeline project
 
-# TypeScript, TypeOrm, Express JWT, React Native w/ Hooks
+# TypeScript, TypeOrm, Express, JWT, Next.js, React Native w/ Hooks
 
 <p align="middle">
 <img src="./readmeassets/splashscreen.png" width="200" height="400">
@@ -11,13 +11,15 @@ FullStack React Native TypeScript, GraphQL App for posting small and odd jobs in
 
 ![Final App](./readmeassets/indev.png)
 
-# This app does not use Expo runs natively on respected device
+# This app does not use Expo runs natively on respected device, Next.js application runs in browser
 
 EasyGig allows members of the community to make extra money by helping those who need lawn care, baby sitting, computer repair and other general work around the home or place of business.
 
 This project uses the following technologies:
 
-- [React Native](https://reactnative.dev/) and [React Navigation](https://reactnavigation.org/) for frontend
+- [React Native](https://reactnative.dev/) and [React Navigation](https://reactnavigation.org/) for mobile frontend iOs & Android
+- [Next.js](https://nextjs.org/) and [React Navigation](https://reactnavigation.org/) for Web Browser frontend:  
+  Next.js gives you the best developer experience with all the features you need for production: hybrid static & server rendering, TypeScript support, smart bundling, route pre-fetching, and more. No config needed.
 - [Yarn](https://yarnpkg.com/) and [Node.js](https://nodejs.org/en/) as the package manager
 - [TypeScript](https://www.typescriptlang.org/) for maintaining consistency throughout the code base
 - [TypeOrm](https://typeorm.io/#/) TypeORM supports both Active Record and Data Mapper patterns, unlike all other JavaScript ORMs currently in existence, which means you can write high quality, loosely coupled, scalable, maintainable applications the most productive way.

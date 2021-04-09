@@ -12,6 +12,7 @@ import {useNavigation} from '@react-navigation/native';
 import {useUsersQuery} from '../../generated/graphql';
 
 import styles from './styles';
+import Header from '../../components/Header';
 import Bye from '../Bye';
 
 const HomeScreen = (props: any) => {
@@ -26,6 +27,7 @@ const HomeScreen = (props: any) => {
   }
   return (
     <SafeAreaView>
+      <Header />
       <Text>users:</Text>
       {data.users.map(x => {
         return (

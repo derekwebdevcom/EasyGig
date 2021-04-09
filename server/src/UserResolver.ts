@@ -8,30 +8,33 @@ import {
   Resolver,
   UseMiddleware,
   Int,
-} from "type-graphql";
-import { hash, compare } from "bcryptjs";
-import { User } from "./entity/User";
-import { isAuth } from "./isAuth";
-import { MyContext } from "./MyContext";
-import { createAccessToken, createRefreshToken } from "./auth";
-import { sendRefreshToken } from "./sendRefreshToken";
-import { getConnection } from "typeorm";
+} from 'type-graphql';
+import {hash, compare} from 'bcryptjs';
+import {User} from './entity/User';
+import {isAuth} from './isAuth';
+import {MyContext} from './MyContext';
+import {createAccessToken, createRefreshToken} from './auth';
+import {sendRefreshToken} from './sendRefreshToken';
+import {getConnection} from 'typeorm';
+import {verify} from 'jsonwebtoken';
 @ObjectType()
 class LoginResponse {
   @Field()
   accessToken: string;
+  @Field(() => User)
+  user: User;
 }
 
 @Resolver()
 export class UserResolver {
   @Query(() => String)
   hello() {
-    return "hi!";
+    return 'hi!';
   }
 
   @Query(() => String)
   @UseMiddleware(isAuth)
-  bye(@Ctx() { payload }: MyContext) {
+  bye(@Ctx() {payload}: MyContext) {
     console.log(payload);
     return `Your User Id is: ${payload!.userId}`;
   }
@@ -41,43 +44,68 @@ export class UserResolver {
     return User.find();
   }
 
+  @Query(() => User, {nullable: true})
+  me(@Ctx() context: MyContext) {
+    const authorizonation = context.req.headers['authorization'];
+
+    if (!authorizonation) {
+      return null;
+    }
+
+    try {
+      const token = authorizonation?.split(' ')[1];
+      const payload: any = verify(token, process.env.ACCESS_TOKEN_SECRET!);
+      return User.findOne(payload.userId);
+    } catch (err) {
+      console.log(err);
+      return null;
+    }
+  }
+
   @Mutation(() => Boolean)
-  async revokeRefreshTokensForUser(@Arg("userId", () => Int) userId: number) {
+  async revokeRefreshTokensForUser(@Arg('userId', () => Int) userId: number) {
     await getConnection()
       .getRepository(User)
-      .increment({ id: userId }, "tokenVersion", 1);
+      .increment({id: userId}, 'tokenVersion', 1);
+    return true;
+  }
+
+  @Mutation(() => Boolean)
+  async logout(@Ctx() {res}: MyContext) {
+    sendRefreshToken(res, '');
     return true;
   }
 
   @Mutation(() => LoginResponse)
   async login(
-    @Arg("email") email: string,
-    @Arg("password") password: string,
-    @Ctx() { res }: MyContext
+    @Arg('email') email: string,
+    @Arg('password') password: string,
+    @Ctx() {res}: MyContext,
   ): Promise<LoginResponse> {
-    const user = await User.findOne({ where: { email } });
+    const user = await User.findOne({where: {email}});
 
     if (!user) {
-      throw new Error("could not find user");
+      throw new Error('could not find user');
     }
 
     const valid = await compare(password, user.password);
 
     if (!valid) {
-      throw new Error("bad password");
+      throw new Error('bad password');
     }
 
     sendRefreshToken(res, createRefreshToken(user));
 
     return {
       accessToken: createAccessToken(user),
+      user,
     };
   }
 
   @Mutation(() => Boolean)
   async register(
-    @Arg("email") email: string,
-    @Arg("password") password: string
+    @Arg('email') email: string,
+    @Arg('password') password: string,
   ) {
     const hashedPassword = await hash(password, 12);
     try {
