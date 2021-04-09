@@ -7,12 +7,14 @@ import Feather from 'react-native-vector-icons/Feather';
 import Register from '../Register';
 import * as Animatable from 'react-native-animatable';
 import styles from './styles';
-interface Props {}
-
+import {useLoginMutation} from '../../generated/graphql';
+import {useNavigation} from '@react-navigation/native';
+import {setAccessToken} from '../../accessToken';
 const Login = (props: any) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-
+  const [login] = useLoginMutation();
+  const navigation = useNavigation();
   const [secureEntry, setSecureEntry] = useState({
     email: '',
     password: '',
@@ -49,6 +51,20 @@ const Login = (props: any) => {
     });
   };
 
+  const loginWorker = async () => {
+    const response = await login({
+      variables: {
+        email,
+        password,
+      },
+    });
+    console.log(response);
+    if (response && response.data) {
+      setAccessToken(response.data.login.accessToken);
+    }
+    navigation.navigate('HomeScreen');
+  };
+
   return (
     <View style={styles.container}>
       <Text style={styles.heading}>Login EasyGig</Text>
@@ -61,7 +77,9 @@ const Login = (props: any) => {
           placeholder="Please enter your email"
           style={styles.textInput}
           autoCapitalize="none"
-          onChangeText={val => textInputChange(val)}
+          onChangeText={text => setEmail(text)}
+          value={email}
+          // onChangeText={val => textInputChange(val)}
         />
         {secureEntry.check_textInputChange ? (
           <Animatable.View animation="bounceIn">
@@ -78,14 +96,24 @@ const Login = (props: any) => {
           placeholder="Please enter your password"
           style={styles.textInput}
           secureTextEntry={secureEntry.secureTextEntry ? true : false}
-          onChangeText={val => passInputChange(val)}
+          onChangeText={text => setPassword(text)}
+          value={password}
+          // onChangeText={val => passInputChange(val)}
         />
         <TouchableOpacity onPress={updateSecureTextEntry}>
-          <Feather name="eye-off" color="white" size={20} />
+          {secureEntry.secureTextEntry ? (
+            <Animatable.View animation="bounceIn">
+              <Feather name="eye-off" color="white" size={20} />
+            </Animatable.View>
+          ) : (
+            <Animatable.View animation="bounceIn">
+              <Feather name="eye" color="white" size={20} />
+            </Animatable.View>
+          )}
         </TouchableOpacity>
       </View>
 
-      <TouchableOpacity style={styles.button}>
+      <TouchableOpacity style={styles.button} onPress={loginWorker}>
         <LinearGradient
           colors={['#43D4FF', '#38ABFD', '#2974FA']}
           style={styles.gradient}>

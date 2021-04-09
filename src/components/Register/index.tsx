@@ -11,8 +11,6 @@ import {validate} from 'graphql';
 import {useRegisterMutation} from '../../generated/graphql';
 import {useNavigation} from '@react-navigation/native';
 
-interface Props {}
-
 const Register = (props: any) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');

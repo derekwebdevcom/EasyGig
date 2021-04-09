@@ -6,21 +6,37 @@ import {
   SafeAreaView,
   TouchableOpacity,
   FlatList,
+  Button,
 } from 'react-native';
+import {useNavigation} from '@react-navigation/native';
 import {useUsersQuery} from '../../generated/graphql';
 
 import styles from './styles';
+import Bye from '../Bye';
 
 const HomeScreen = (props: any) => {
   const {data} = useUsersQuery({fetchPolicy: 'network-only'});
+  const navigation = useNavigation();
+  if (!data) {
+    return (
+      <SafeAreaView>
+        <Text>loading...</Text>
+      </SafeAreaView>
+    );
+  }
   return (
     <SafeAreaView>
       <Text>users:</Text>
-      {/* <View>
-        {data?.users.map(x => {
-          return <
-        })}
-      </View> */}
+      {data.users.map(x => {
+        return (
+          <SafeAreaView key={x.id}>
+            <Text>
+              {x.email}, {x.id}
+            </Text>
+          </SafeAreaView>
+        );
+      })}
+      <Bye />
     </SafeAreaView>
   );
 };
