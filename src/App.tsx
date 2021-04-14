@@ -112,7 +112,6 @@ cache.writeData({
 
 const App = () => {
   return (
-    // <TempView />
     <NavigationContainer>
       <RouteStack />
     </NavigationContainer>

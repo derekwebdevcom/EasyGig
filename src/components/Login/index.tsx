@@ -4,7 +4,6 @@ import LinearGradient from 'react-native-linear-gradient';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import Feather from 'react-native-vector-icons/Feather';
-import Register from '../Register';
 import * as Animatable from 'react-native-animatable';
 import styles from './styles';
 import {MeDocument, MeQuery, useLoginMutation} from '../../generated/graphql';
