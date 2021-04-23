@@ -21,25 +21,25 @@ const Login = (props: any) => {
     secureTextEntry: true,
   });
 
-  const textInputChange = (val: string) => {
-    if (val.length !== 0) {
+  const textInputChange = (email: string) => {
+    if (email.length !== 0) {
       setSecureEntry({
         ...secureEntry,
-        email: val,
+        email: email,
         check_textInputChange: true,
       });
     } else {
       setSecureEntry({
         ...secureEntry,
-        email: val,
+        email: email,
         check_textInputChange: false,
       });
     }
   };
-  const passInputChange = (val: string) => {
+  const passInputChange = (password: string) => {
     setSecureEntry({
       ...secureEntry,
-      password: val,
+      password: password,
     });
   };
 
@@ -71,13 +71,21 @@ const Login = (props: any) => {
     console.log(response);
     if (response && response.data) {
       setAccessToken(response.data.login.accessToken);
+      navigation.navigate('HomeStackScreen');
     }
-    navigation.navigate('HomeScreen');
+  };
+  const combinedAction = (text: React.SetStateAction<string>) => {
+    setEmail(text);
+    textInputChange(email);
+  };
+  const combinedAction2 = (text: React.SetStateAction<string>) => {
+    setPassword(text);
+    passInputChange(password);
   };
 
   return (
     <View style={styles.container}>
-      <Text style={styles.heading}>Login EasyGig</Text>
+      <Text style={styles.heading}>Login to EasyGig</Text>
       <View style={styles.email}>
         <Text style={styles.emailText}>Email:</Text>
       </View>
@@ -87,9 +95,8 @@ const Login = (props: any) => {
           placeholder="Please enter your email"
           style={styles.textInput}
           autoCapitalize="none"
-          onChangeText={text => setEmail(text)}
+          onChangeText={combinedAction}
           value={email}
-          // onChangeText={val => textInputChange(val)}
         />
         {secureEntry.check_textInputChange ? (
           <Animatable.View animation="bounceIn">
@@ -106,9 +113,8 @@ const Login = (props: any) => {
           placeholder="Please enter your password"
           style={styles.textInput}
           secureTextEntry={secureEntry.secureTextEntry ? true : false}
-          onChangeText={text => setPassword(text)}
+          onChangeText={combinedAction2}
           value={password}
-          // onChangeText={val => passInputChange(val)}
         />
         <TouchableOpacity onPress={updateSecureTextEntry}>
           {secureEntry.secureTextEntry ? (

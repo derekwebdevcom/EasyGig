@@ -70,7 +70,7 @@ const client = new ApolloClient({
         }
       },
       fetchAccessToken: () => {
-        return fetch($RefreshURL, {
+        return fetch('http://localhost:4000/refresh_token', {
           method: 'POST',
           credentials: 'include',
         });
@@ -89,25 +89,11 @@ const client = new ApolloClient({
     }),
     requestLink,
     new HttpLink({
-      uri: $URL,
+      uri: 'http://localhost:4000/graphql',
       credentials: 'include',
     }),
   ]),
   cache,
-  resolvers: {
-    Mutation: {
-      updateNetworkStatus: (_, {isConnected}, {cache}) => {
-        cache.writeData({data: {isConnected}});
-        return null;
-      },
-    },
-  },
-});
-
-cache.writeData({
-  data: {
-    isConnected: true,
-  },
 });
 
 const App = () => {

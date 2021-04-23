@@ -28,6 +28,7 @@ const HomeScreen = (props: any) => {
   return (
     <SafeAreaView>
       <Header />
+
       <Text>users:</Text>
       {data.users.map(x => {
         return (
