@@ -1,8 +1,8 @@
 # EasyGig Job Posting
 
-FullStack Next.js Web Client, React Native Mobile Client, TypeScript, GraphQL App for posting small and odd jobs in the community. -In progress CI/CD pipeline project
+FullStack Next.js Web Client, React Native Mobile Client, TypeScript, GraphQL, Docker App for posting small and odd jobs in the community. -In progress CI/CD pipeline project
 
-# TypeScript, TypeOrm, Express, JWT, Next.js, React Native w/ Hooks
+# TypeScript, TypeOrm, Express, JWT, Next.js, React Native w/ Hooks & Docker
 
 <p align="middle">
 <img src="./readmeassets/splashscreen.png" width="200" height="400">
