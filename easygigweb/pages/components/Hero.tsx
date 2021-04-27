@@ -5,11 +5,18 @@ const Hero = () => {
   return (
     <div
       style={{
-        margin: 0,
-        width: '100%',
+        marginTop: 189,
+        marginLeft: 0,
         zIndex: 0,
       }}>
-      <Image src="/assets/easygig1scene.jpg" layout="fill"></Image>
+      <img src="/assets/easygig1scene.jpg" height="500px" width="100%" />
+      <form>
+        <input placeholder={'Enter your Email'} style={{zIndex: 1}} />
+        <input
+          placeholder={'Enter your password'}
+          style={{zIndex: 1, marginBottom: 100}}
+        />
+      </form>
     </div>
   );
 };
