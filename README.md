@@ -11,7 +11,7 @@ FullStack Next.js Web Client, React Native Mobile Client, TypeScript, GraphQL, D
 
 ![Final App](./readmeassets/indev.png)
 
-# This app does not use Expo runs natively on respected device, Next.js application runs in browser
+# This app does not use Expo runs natively on respective device, Next.js application runs in browser
 
 EasyGig allows members of the community to make extra money by helping those who need lawn care, baby sitting, computer repair and other general work around the home or place of business.
 
